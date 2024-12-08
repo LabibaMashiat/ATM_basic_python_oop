@@ -11,11 +11,23 @@ class Atm:
     #These two can be accessed by the objects of that class only.
     #In a same class one method can not directly access another method
     #For this we use self which is an object
+    __count=1
     def __init__(self):
         self.pin=""
         self.balance=0
-        print("Memory address of the object:", id(self))
+        self.sno=Atm.__count
+        Atm.__count+=1
+        #print("Memory address of the object:", id(self))
         self.menu()
+    @staticmethod
+    def get_count():
+        return Atm.__count
+    @staticmethod
+    def set_count(new_pin):
+        if type(new_pin)==int:
+            Atm.__count=new_pin
+        else:
+            print("Not Allowed")
         
         
     def menu(self):
@@ -35,6 +47,7 @@ class Atm:
                 self.withdraw_amount()
             elif user_input=="4":
                 self.check_balance()
+               
             else:
                 print("Bye")
                 break
